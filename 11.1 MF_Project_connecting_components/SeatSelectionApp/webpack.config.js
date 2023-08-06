@@ -22,8 +22,7 @@ module.exports = {
       name: "seatselection",
       filename: "remoteEntry.js",
       exposes: {
-        "./SeatSelection":
-          "./src/components/SeatSelectionContent/SeatSelectionContent.jsx",
+        "./SeatSelection": "./src/components/SeatSelectionContent/SeatSelectionContent.jsx",
       },
       shared: ["react","react-dom"]
     }),
