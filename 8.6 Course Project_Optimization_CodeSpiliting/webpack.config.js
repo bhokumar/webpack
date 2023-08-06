@@ -12,10 +12,9 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    assetModuleFilename: "assets/[hash][ext]",
   },
   devServer: {
-    static: "./dist"
+    static: "./dist",
   },
   module: {
     rules: [
@@ -28,33 +27,37 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /.(png|jpeg|gif|svg)/,
-        type: "asset/resource"
-    }
+        test: /\.(png|jpeg|jpg|gif)$/,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       chunks: ["index"],
-      filename: "index.html"
+      filename: "index.html",
     }),
     new HtmlWebpackPlugin({
       template: "./src/pages/courses.html",
       chunks: ["courses"],
-      filename: "courses.html"
+      filename: "courses.html",
+      base: "pages",
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "src/assets/images/*.png"),
+          from: path.resolve(__dirname, "src/assets/images/*"),
           to: path.resolve(__dirname, "dist"),
-          context: 'src'
-        }
-      ]
+          context: "src",
+        },
+      ],
     }),
-    new BundleAnalyzerPlugin({
-      
-    })
-  ]
+    // new BundleAnalyzerPlugin({})
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: "all"
+    }
+  }
 };
