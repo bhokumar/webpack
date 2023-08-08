@@ -30,7 +30,12 @@ const DetailsContent = (props) => {
       movie: movie.id,
       date,
       time,
-    };   
+    }; 
+    import("movieapp/MoviesData").then((module) => {
+      const moviesData = module.default;
+      moviesData.next(booking);
+      props.routing.history.push('/book');
+    });  
   };
 
   return (
